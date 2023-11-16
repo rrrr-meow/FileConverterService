@@ -1,4 +1,5 @@
 package service.readers;
 
-public class ReadJSON {
+public class ReadJSON implements Reader{
+
 }
