@@ -1,5 +1,10 @@
 package service.writers;
 
+import service.structure.LibraryXML;
+
+import java.io.FileNotFoundException;
+import java.util.List;
+
 public interface Writer {
-    //void write(List<University> universities, String path);
+    void write(LibraryXML library, String out) throws FileNotFoundException;
 }

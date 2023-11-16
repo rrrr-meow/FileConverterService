@@ -1,5 +1,8 @@
 package service.converters;
 
-public interface Converter {
+import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 
+public interface Converter {
+    void Convert(String in, String out) throws JAXBException, FileNotFoundException;
 }
