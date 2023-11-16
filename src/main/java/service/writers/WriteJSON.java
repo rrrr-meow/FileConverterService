@@ -13,7 +13,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WriteXML implements Writer{
+public class WriteJSON implements Writer{
     @Override
     public void write(LibraryXML library, String out) throws FileNotFoundException{
         ToJson(library, out);
