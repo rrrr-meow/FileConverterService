@@ -1,5 +1,8 @@
 package service.readers;
 
+import service.structure.BooksJSON;
+import java.io.FileNotFoundException;
+
 public interface Reader {
-    //void read(List<University> universities, String path);
+    BooksJSON read(String in) throws FileNotFoundException;
 }

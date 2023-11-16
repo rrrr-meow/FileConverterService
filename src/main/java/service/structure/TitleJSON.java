@@ -18,4 +18,9 @@ public class TitleJSON {
     public void setBook(List<BookJSON> book) {
         this.book = book;
     }
+    public Boolean isNull()
+    {
+        if (title == null && book == null) return true;
+        else return false;
+    }
 }
