@@ -3,7 +3,7 @@ package service.structure;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-@XmlRootElement
+@XmlRootElement(name = "library")
 public class LibraryXML {
     private List<GenresXML> genre;
     @XmlElement(name = "genre")

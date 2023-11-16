@@ -3,7 +3,7 @@ package service.structure;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-@XmlRootElement
+@XmlRootElement(name = "book")
 public class BookXML {
     private String author;
     private String title;
