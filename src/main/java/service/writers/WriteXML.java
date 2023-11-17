@@ -1,6 +1,5 @@
 package service.writers;
 
-import service.structure.BooksJSON;
 import service.structure.LibraryXML;
 
 import javax.xml.bind.JAXBContext;

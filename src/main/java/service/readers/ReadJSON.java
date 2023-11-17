@@ -29,11 +29,6 @@ public class ReadJSON implements Reader{
         List<TitleJSON> booksList = new ArrayList<>();
         TitleJSON title = new TitleJSON();
         BookJSON book = new BookJSON();
-        /*LibraryXML libraryXML = new LibraryXML();
-        List<GenresXML> genres = new ArrayList<>();
-        GenresXML genre = new GenresXML();
-        BooksXML books = new BooksXML();
-        BookXML book = new BookXML();*/
 
 
         while (parser.hasNext()){
