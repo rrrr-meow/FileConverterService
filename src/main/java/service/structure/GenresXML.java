@@ -22,4 +22,9 @@ public class GenresXML {
     public void setBooks(BooksXML books) {
         this.books = books;
     }
+    public Boolean isNull()
+    {
+        if (genre == null && books == null) return true;
+        else return false;
+    }
 }
