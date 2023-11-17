@@ -28,7 +28,7 @@ public class ReadJSON implements Reader{
         if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) return null;
 
         BooksJSON books = new BooksJSON();
-        List<BooksJSON> booksList = new ArrayList<>();
+        List<TitleJSON> booksList = new ArrayList<>();
         TitleJSON title = new TitleJSON();
         BookJSON book = new BookJSON();
 
@@ -40,7 +40,7 @@ public class ReadJSON implements Reader{
                     break;
                 }
                 case VALUE_STRING -> {
-                    SetStringValue(title,book, keyName, parser.getString());
+                    SetStringValue(title, book, keyName, parser.getString());
                     break;
                 }
                 case VALUE_NUMBER -> {
@@ -48,6 +48,14 @@ public class ReadJSON implements Reader{
                         book.setYear(parser.getInt());
                     }
                     break;
+                }
+                case END_OBJECT -> {
+                    if (!title.isNull()) {
+                        title.setBook(book);
+                        booksList.add(title);
+                        title = new TitleJSON();
+                        book = new BookJSON();
+                    }
                 }
                 default -> {break;}
             }

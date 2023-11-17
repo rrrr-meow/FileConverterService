@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TitleJSON {
     private String title;
-    private List<BookJSON> book;
+    private BookJSON book;
 
     public String getTitle() {
         return this.title;
@@ -12,10 +12,10 @@ public class TitleJSON {
     public void setTitle(String title) {
         this.title = title;
     }
-    public List<BookJSON> getBook() {
+    public BookJSON getBook() {
         return this.book;
     }
-    public void setBook(List<BookJSON> book) {
+    public void setBook(BookJSON book) {
         this.book = book;
     }
     public Boolean isNull()
