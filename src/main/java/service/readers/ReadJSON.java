@@ -1,8 +1,6 @@
 package service.readers;
 
-import service.structure.BookJSON;
-import service.structure.BooksJSON;
-import service.structure.TitleJSON;
+import service.structure.*;
 
 import javax.json.Json;
 import javax.json.stream.JsonParser;
@@ -31,6 +29,12 @@ public class ReadJSON implements Reader{
         List<TitleJSON> booksList = new ArrayList<>();
         TitleJSON title = new TitleJSON();
         BookJSON book = new BookJSON();
+        /*LibraryXML libraryXML = new LibraryXML();
+        List<GenresXML> genres = new ArrayList<>();
+        GenresXML genre = new GenresXML();
+        BooksXML books = new BooksXML();
+        BookXML book = new BookXML();*/
+
 
         while (parser.hasNext()){
             JsonParser.Event event = parser.next();
@@ -60,6 +64,7 @@ public class ReadJSON implements Reader{
                 default -> {break;}
             }
         }
+        books.setBooks(booksList);
         return books;
     }
     private void SetStringValue(TitleJSON title, BookJSON book, String key, String value){
