@@ -42,8 +42,6 @@ public class WriteJSON implements Writer{
 
         JsonObject obj = objectBuilder.build();
 
-        System.out.println("Post JSON String -> " + obj);
-
         OutputStream os = new FileOutputStream(out);
         JsonWriter jsonWriter;
 
