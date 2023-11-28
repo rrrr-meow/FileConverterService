@@ -11,71 +11,70 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadJSON implements Reader{
+public class ReadJSON implements Reader {
     @Override
     public BooksJSON read(String in) throws FileNotFoundException {
-        return ReadJSON(in);
+        return readJson(in);
     }
-    private BooksJSON ReadJSON(String in) throws FileNotFoundException{
+
+    private BooksJSON readJson(String in) throws FileNotFoundException {
         FileInputStream inputStream = new FileInputStream(in);
 
         JsonParserFactory factory = Json.createParserFactory(null);
         JsonParser parser = factory.createParser(inputStream, StandardCharsets.UTF_8);
         String keyName = null;
 
-        if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) return null;
+        if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) {
+            return null;
+        }
 
         BooksJSON books = new BooksJSON();
         List<TitleJSON> booksList = new ArrayList<>();
         TitleJSON title = new TitleJSON();
         BookJSON book = new BookJSON();
 
-
-        while (parser.hasNext()){
+        while (parser.hasNext()) {
             JsonParser.Event event = parser.next();
-            switch (event){
-                case KEY_NAME -> {
+
+            switch (event) {
+
+                case KEY_NAME ->
                     keyName = parser.getString();
-                    break;
-                }
-                case VALUE_STRING -> {
-                    SetStringValue(title, book, keyName, parser.getString());
-                    break;
-                }
+
+                case VALUE_STRING ->
+                    setStringValue(title, book, keyName, parser.getString());
+
                 case VALUE_NUMBER -> {
-                    if (keyName.equals("year")){
+                    if (keyName.equals("year")) {
                         book.setYear(parser.getInt());
                     }
-                    break;
                 }
                 case END_OBJECT -> {
-                    if (!title.isNull()) {
+                    if (Boolean.FALSE.equals(title.isNull())) {
                         title.setBook(book);
                         booksList.add(title);
                         title = new TitleJSON();
                         book = new BookJSON();
                     }
                 }
-                default -> {break;}
+                default -> {
+                    break;
+                }
             }
         }
+
         books.setBooks(booksList);
         return books;
     }
-    private void SetStringValue(TitleJSON title, BookJSON book, String key, String value){
-        switch (key){
-            case "title" ->{
+
+    private void setStringValue(TitleJSON title, BookJSON book, String key, String value) {
+        switch (key) {
+            case "title" ->
                 title.setTitle(value);
-                break;
-            }
-            case "genre" ->{
+            case "genre" ->
                 book.setGenre(value);
-                break;
-            }
-            case "author" -> {
+            case "author" ->
                 book.setAuthor(value);
-                break;
-            }
             default -> {break;}
         }
     }
