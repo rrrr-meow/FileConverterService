@@ -4,7 +4,6 @@ import lombok.val;
 import service.ConvertingSelector;
 import service.UserMenu;
 
-
 @Slf4j
 public class Main {
     @SneakyThrows
@@ -29,11 +28,12 @@ public class Main {
             log.info("Данные о файлах считаны!");
 
             val converter = ConvertingSelector.choiseConverter(sourceFilePath, destinationFilePath);
-
             converter.convert(sourceFilePath, destinationFilePath);
+
             System.out.println("онвертация файла" + sourceFilePath + " в файл" + destinationFilePath + " выполнена успешно");
             log.info("Конвертация файла {} в файл {} выполнена успешно", sourceFilePath, destinationFilePath);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println("Ошибка при вводе файлов!" + e.getMessage());
             log.error("Ошибка: {} {}.\\nДетали: {}", e.getMessage(), e.getCause(), e.getStackTrace());
         }

@@ -25,8 +25,8 @@ public class JsonToXml implements Converter{
         List<GenresXML> genresXMLS = new ArrayList<>();
         GenresXML genre;
 
-        for (int i = 0; i < titles.size(); i++) {
-            BookJSON book = titles.get(i).getBook();
+        for (TitleJSON titleJSON : titles) {
+            BookJSON book = titleJSON.getBook();
             genres.add(book.getGenre());
         }
 

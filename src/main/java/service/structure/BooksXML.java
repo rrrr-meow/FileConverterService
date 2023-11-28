@@ -1,17 +1,17 @@
 package service.structure;
 
+import lombok.Data;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@Data
 @XmlRootElement(name = "books")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BooksXML {
-    private List<BookXML> books;
     @XmlElement(name="book")
-    public List<BookXML> getBooks() {
-        return books;
-    }
-    public void setBooks(List<BookXML> books) {
-        this.books = books;
-    }
+    private List<BookXML> books;
 }
