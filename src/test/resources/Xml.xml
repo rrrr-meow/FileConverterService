@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<library>
+    <genre genre = "Роман">
+        <books>
+            <book>
+                <author>Михаил Афанасьевич Булгаков</author>
+                <title>Мастер и Маргарита</title>
+                <year>1967</year>
+            </book>
+            <book>
+                <author>Джейн Остин</author>
+                <title>Гордость и предубеждение</title>
+                <year>1813</year>
+            </book>
+        </books>
+    </genre>
+    <genre genre = "Комедия">
+        <books>
+            <book>
+                <author>Александр Сергеевич Грибоедов</author>
+                <title>Горе от ума</title>
+                <year>1825</year>
+            </book>
+            <book>
+                <author>Джером Клапка Джером</author>
+                <title>Трое в лодке, не считая собаки</title>
+                <year>1889</year>
+            </book>
+            <book>
+                <author>Хелен Филдинг</author>
+                <title>Дневник Бриджит Джонс</title>
+                <year>1996</year>
+            </book>
+            <book>
+                <author>Денис Иванович Фонвизин</author>
+                <title>Недоросль</title>
+                <year>1783</year>
+            </book>
+        </books>
+    </genre>
+    <genre genre = "Фэнтези">
+        <books>
+            <book>
+                <author>Анджей Сапковский</author>
+                <title>Сезон гроз</title>
+                <year>2013</year>
+            </book>
+            <book>
+                <author>Стивен Кинг</author>
+                <title>Стрелок</title>
+                <year>1978</year>
+            </book>
+        </books>
+    </genre>
+    <genre genre = "Детектив">
+        <books>
+            <book>
+                <author>Эдгар Аллан По</author>
+                <title>Убийство на улице Морг</title>
+                <year>1841</year>
+            </book>
+            <book>
+                <author>Агата Кристи</author>
+                <title>Загадка Эндхауза</title>
+                <year>1932</year>
+            </book>
+            <book>
+                <author>Борис Акунин</author>
+                <title>Азазель</title>
+                <year>1998</year>
+            </book>
+        </books>
+    </genre>
+    <genre genre = "Мистика">
+        <books>
+            <book>
+                <author>Стивен Кинг</author>
+                <title>КлаТбище домашних жЫвотных</title>
+                <year>1983</year>
+            </book>
+            <book>
+                <author>Ширли Джексон</author>
+                <title>Призрак дома на холме</title>
+                <year>1959</year>
+            </book>
+        </books>
+    </genre>
+</library>
