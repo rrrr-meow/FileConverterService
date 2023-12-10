@@ -20,7 +20,6 @@ public class WriteJSON implements Writer{
     }
 
     private void writeToJson(LibraryXML library, String out)throws FileNotFoundException{
-
         val objectBuilder = Json.createObjectBuilder();
         val booksBuilder = Json.createArrayBuilder();
 
