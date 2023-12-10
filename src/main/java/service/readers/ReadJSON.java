@@ -1,15 +1,20 @@
 package service.readers;
 
 import lombok.val;
-import service.structure.*;
+import service.structure.JSON.BookJSON;
+import service.structure.JSON.BooksJSON;
+import service.structure.JSON.TitleJSON;
+
 import javax.json.stream.JsonParser;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static javax.json.Json.createParserFactory;
+
 
 public class ReadJSON implements Reader {
     @Override
@@ -20,53 +25,48 @@ public class ReadJSON implements Reader {
     private BooksJSON readJson(String in) throws FileNotFoundException {
         val inputStream = new FileInputStream(in);
 
-        try(JsonParser parser = createParserFactory(null).createParser(inputStream, StandardCharsets.UTF_8)) {
-            String keyName = null;
+        val parser = createParserFactory(null).createParser(inputStream, StandardCharsets.UTF_8);
+        String keyName = null;
 
-            if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) {
-                return null;
-            }
+        if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) {
+            return null;
+        }
 
-            BooksJSON books = new BooksJSON();
-            List<TitleJSON> booksList = new ArrayList<>();
-            TitleJSON title = new TitleJSON();
-            BookJSON book = new BookJSON();
+        val books = BooksJSON.builder().build();
+        List<TitleJSON> booksList = new ArrayList<>();
+        TitleJSON title = TitleJSON.builder().build();
+        BookJSON book = BookJSON.builder().build();
 
-            while (parser.hasNext()) {
-                switch (parser.next()) {
-                    case KEY_NAME -> keyName = parser.getString();
-                    case VALUE_STRING -> setStringValue(title, book, keyName, parser.getString());
-                    case VALUE_NUMBER -> {
-                        if (keyName.equals("year")) {
-                            book.setYear(parser.getInt());
-                        }
+        while (parser.hasNext()) {
+            switch (parser.next()) {
+                case KEY_NAME -> keyName = parser.getString();
+                case VALUE_STRING -> setStringValue(title, book, Objects.requireNonNull(keyName), parser.getString());
+                case VALUE_NUMBER -> {
+                    if (Objects.equals(keyName, "year")) {
+                        book.setYear(parser.getInt());
                     }
-                    case END_OBJECT -> {
-                        if (Boolean.FALSE.equals(title.isNull())) {
-                            title.setBook(book);
-                            booksList.add(title);
-                            title = new TitleJSON();
-                            book = new BookJSON();
-                        }
+                }
+                case END_OBJECT -> {
+                    if (Boolean.FALSE.equals( title.isNull())) {
+                        title.setBook(book);
+                        booksList.add(title);
+                        title = TitleJSON.builder().build();
+                        book = BookJSON.builder().build();
                     }
-                    default -> {break;}
                 }
             }
-            books.setBooks(booksList);
-
-            return books;
         }
+        books.setBooks(booksList);
+
+        return books;
     }
+
 
     private void setStringValue(TitleJSON title, BookJSON book, String key, String value) {
         switch (key) {
-            case "title" ->
-                title.setTitle(value);
-            case "genre" ->
-                book.setGenre(value);
-            case "author" ->
-                book.setAuthor(value);
-            default -> {break;}
+            case "title" -> title.setTitle(value);
+            case "genre" -> book.setGenre(value);
+            case "author" -> book.setAuthor(value);
         }
     }
 }

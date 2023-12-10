@@ -1,9 +1,9 @@
 package service.writers;
 
-import service.structure.BookXML;
-import service.structure.BooksXML;
-import service.structure.GenresXML;
-import service.structure.LibraryXML;
+import lombok.val;
+import service.structure.XML.BookXML;
+import service.structure.XML.GenresXML;
+import service.structure.XML.LibraryXML;
 
 import javax.json.*;
 import javax.json.stream.JsonGenerator;
@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-
+//@Builder
 public class WriteJSON implements Writer{
     @Override
     public void write(LibraryXML library, String out) throws FileNotFoundException{
@@ -20,15 +20,16 @@ public class WriteJSON implements Writer{
     }
 
     private void writeToJson(LibraryXML library, String out)throws FileNotFoundException{
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        JsonArrayBuilder booksBuilder = Json.createArrayBuilder();
+
+        val objectBuilder = Json.createObjectBuilder();
+        val booksBuilder = Json.createArrayBuilder();
 
         for (GenresXML genre : library.getGenre()){
-            JsonObjectBuilder titleBuilder = Json.createObjectBuilder();
-            JsonObjectBuilder bookBuilder = Json.createObjectBuilder();
+            val titleBuilder = Json.createObjectBuilder();
+            val bookBuilder = Json.createObjectBuilder();
 
-            BooksXML books = genre.getBooks();
-            for (BookXML book : books.getBooks()) {
+            val books = genre.getBooks();
+            for (BookXML book : books.getBook()) {
                 bookBuilder.add("genre", genre.getGenre());
                 bookBuilder.add("author", book.getAuthor());
                 titleBuilder.add("title", book.getTitle());

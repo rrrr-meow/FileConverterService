@@ -9,11 +9,11 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 class MainClassTests {
-    private final String inputPath = "C:\\Users\\Алёна\\OneDrive\\Рабочий стол\\Практика\\FileConverterService\\src\\test\\resources\\Xml.xml";
-    private final String outputPath = "C:\\Users\\Алёна\\OneDrive\\Рабочий стол\\Практика\\FileConverterService\\src\\test\\resources\\Json.json";
+    private final String inputPath = "src\\test\\resources\\Xml.xml";
 
     @Test
     void testCorectArgs() {
+        val outputPath = "src\\test\\resources\\Json.json";
         val args = new String[]{inputPath, outputPath};
         Main.main(args);
 

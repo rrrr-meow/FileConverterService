@@ -1,6 +1,6 @@
 package service.writers;
 
-import service.structure.LibraryXML;
+import service.structure.XML.LibraryXML;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 
