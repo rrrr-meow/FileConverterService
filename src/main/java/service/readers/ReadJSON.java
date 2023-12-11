@@ -24,43 +24,44 @@ public class ReadJSON implements Reader {
 
     @SneakyThrows
     private BooksJSON readJson(String in) {
-        val inputStream = new FileInputStream(in);
+        try(val inputStream = new FileInputStream(in);
+            val parser = createParserFactory(null).createParser(inputStream, StandardCharsets.UTF_8)){
 
-        val parser = createParserFactory(null).createParser(inputStream, StandardCharsets.UTF_8);
-        String keyName = null;
+            String keyName = null;
 
-        if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) {
-            return null;
-        }
+            if (!parser.hasNext() && parser.next() != JsonParser.Event.START_ARRAY) {
+                return null;
+            }
 
-        val books = BooksJSON.builder().build();
-        List<TitleJSON> booksList = new ArrayList<>();
-        TitleJSON title = TitleJSON.builder().build();
-        BookJSON book = BookJSON.builder().build();
+            val books = BooksJSON.builder().build();
+            List<TitleJSON> booksList = new ArrayList<>();
+            TitleJSON title = TitleJSON.builder().build();
+            BookJSON book = BookJSON.builder().build();
 
-        while (parser.hasNext()) {
-            switch (parser.next()) {
-                case KEY_NAME -> keyName = parser.getString();
-                case VALUE_STRING -> setStringValue(title, book, Objects.requireNonNull(keyName), parser.getString());
-                case VALUE_NUMBER -> {
-                    if (Objects.equals(keyName, "year")) {
-                        book.setYear(parser.getInt());
+            while (parser.hasNext()) {
+                switch (parser.next()) {
+                    case KEY_NAME -> keyName = parser.getString();
+                    case VALUE_STRING -> setStringValue(title, book, Objects.requireNonNull(keyName), parser.getString());
+                    case VALUE_NUMBER -> {
+                        if (Objects.equals(keyName, "year")) {
+                            book.setYear(parser.getInt());
+                        }
                     }
-                }
-                case END_OBJECT -> {
-                    if (Boolean.FALSE.equals( title.isNull())) {
-                        title.setBook(book);
-                        booksList.add(title);
-                        title = TitleJSON.builder().build();
-                        book = BookJSON.builder().build();
+                    case END_OBJECT -> {
+                        if (Boolean.FALSE.equals(title.isNull())) {
+                            title.setBook(book);
+                            booksList.add(title);
+                            title = TitleJSON.builder().build();
+                            book = BookJSON.builder().build();
+                        }
                     }
                 }
             }
-        }
-        books.setBooks(booksList);
-        inputStream.close();
+            books.setBooks(booksList);
+            inputStream.close();
 
-        return books;
+            return books;
+        }
     }
 
 
