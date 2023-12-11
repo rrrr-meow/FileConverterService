@@ -20,26 +20,18 @@ public class WriteJSON implements Writer{
     }
 
     private void writeToJson(LibraryXML library, String out)throws FileNotFoundException{
-        val objectBuilder = Json.createObjectBuilder();
-        val booksBuilder = Json.createArrayBuilder();
-
-        for (GenresXML genre : library.getGenre()){
-            val titleBuilder = Json.createObjectBuilder();
-            val bookBuilder = Json.createObjectBuilder();
-
-            val books = genre.getBooks();
-            for (BookXML book : books.getBook()) {
-                bookBuilder.add("genre", genre.getGenre());
-                bookBuilder.add("author", book.getAuthor());
-                titleBuilder.add("title", book.getTitle());
-                bookBuilder.add("year", book.getYear());
-                titleBuilder.add("book", bookBuilder);
-                booksBuilder.add(titleBuilder);
-            }
-        }
-        objectBuilder.add("books", booksBuilder);
-
-        JsonObject object = objectBuilder.build();
+        JsonObject obj = Json.createObjectBuilder()
+                .add("books", (JsonArrayBuilder) library.getGenre().stream()
+                        .flatMap(genre -> genre.getBooks().getBook().stream()
+                                .map(bookXML -> Json.createObjectBuilder()
+                                        .add("title", bookXML.getTitle())
+                                        .add("book", Json.createObjectBuilder()
+                                                .add("genre", genre.getGenre())
+                                                .add("author", bookXML.getAuthor())
+                                                .add("year", bookXML.getYear()))
+                                        .build()))
+                        .collect(Json::createArrayBuilder, JsonArrayBuilder::add, JsonArrayBuilder:: add))
+                .build();
 
         OutputStream outStream = new FileOutputStream(out);
 
@@ -51,7 +43,7 @@ public class WriteJSON implements Writer{
         JsonWriterFactory factory = Json.createWriterFactory(config);
         jsonWriter = factory.createWriter(outStream);
 
-        jsonWriter.writeObject(object);
+        jsonWriter.writeObject(obj);
         jsonWriter.close();
     }
 }

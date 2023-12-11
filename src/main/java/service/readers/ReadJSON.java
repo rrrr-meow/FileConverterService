@@ -1,5 +1,6 @@
 package service.readers;
 
+import lombok.SneakyThrows;
 import lombok.val;
 import service.structure.JSON.BookJSON;
 import service.structure.JSON.BooksJSON;
@@ -7,8 +8,6 @@ import service.structure.JSON.TitleJSON;
 
 import javax.json.stream.JsonParser;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,12 @@ import static javax.json.Json.createParserFactory;
 
 public class ReadJSON implements Reader {
     @Override
-    public BooksJSON read(String in) throws FileNotFoundException {
+    public BooksJSON read(String in){
         return readJson(in);
     }
 
-    private BooksJSON readJson(String in) throws FileNotFoundException {
+    @SneakyThrows
+    private BooksJSON readJson(String in) {
         val inputStream = new FileInputStream(in);
 
         val parser = createParserFactory(null).createParser(inputStream, StandardCharsets.UTF_8);
@@ -58,6 +58,7 @@ public class ReadJSON implements Reader {
             }
         }
         books.setBooks(booksList);
+        inputStream.close();
 
         return books;
     }
