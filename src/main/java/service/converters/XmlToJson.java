@@ -5,7 +5,7 @@ import service.readers.ReadXML;
 import service.writers.WriteJSON;
 
 import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 
 public class XmlToJson implements Converter{
