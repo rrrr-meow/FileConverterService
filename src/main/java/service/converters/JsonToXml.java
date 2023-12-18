@@ -1,24 +1,22 @@
 package service.converters;
 
 import lombok.val;
-import service.readers.ReadJSON;
 import service.structure.JSON.BooksJSON;
 import service.structure.XML.BookXML;
 import service.structure.XML.BooksXML;
 import service.structure.XML.GenresXML;
 import service.structure.XML.LibraryXML;
-import service.writers.WriteXML;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonToXml implements Converter {
     @Override
-    public void convert(String in, String out) throws FileNotFoundException {
-        val readJson = new ReadJSON();
+    public void convert(File in, File out) {
+        val readJson = new Json();
         val books = readJson.read(in);
-        val writeXml = new WriteXML();
+        val writeXml = new Xml();
         writeXml.write(getGenres(books), out);
     }
 

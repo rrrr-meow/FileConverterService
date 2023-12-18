@@ -1,6 +1,7 @@
 import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import service.FileConverter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,7 +16,7 @@ class MainClassTests {
     void testCorectArgs() {
         val outputPath = "src\\test\\resources\\Json.json";
         val args = new String[]{inputPath, outputPath};
-        Main.main(args);
+        FileConverter.main(args);
 
         val outputFile = new File(outputPath);
         assertTrue(outputFile.exists());
@@ -28,7 +29,7 @@ class MainClassTests {
         System.setErr(new PrintStream(errContent));
         try {
             val args = new String[]{inputPath};
-            Main.main(args);
+            FileConverter.main(args);
 
             assertEquals("Неверное количество аргументов! Для автоматического режима введите 2 аргумента, для ручного режима не указывайте аргументы.\r\n", errContent.toString());
         }

@@ -1,18 +1,18 @@
 package service.structure.JSON;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import service.structure.JSON.BookJSON;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class TitleJSON {
+    @JsonProperty("title")
     private String title;
+    @JsonProperty("book")
     private BookJSON book;
-    public boolean isNull()
-    {
-        return title == null && book == null;
-    }
 }
