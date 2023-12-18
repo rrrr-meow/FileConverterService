@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class Json {
     @SneakyThrows
     public BooksJSON read(File in){
@@ -40,7 +42,7 @@ public class Json {
                                                 .year(bookXML.getYear())
                                                 .build())
                                         .build()))
-                        .collect(Collectors.toList()))
+                        .toList())
                 .build();
     }
 }
