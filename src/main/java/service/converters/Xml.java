@@ -21,11 +21,11 @@ public class Xml {
         }
     }
 
-    public LibraryXML read(File in) throws JAXBException {
+    public LibraryXML read(final File in) throws JAXBException {
         return (LibraryXML) JAXB_CONTEXT.createUnmarshaller().unmarshal(in);
     }
     @SneakyThrows
-    public void write(LibraryXML libraryXML, File out) {
+    public void write(final LibraryXML libraryXML, final File out) {
         val marshaller = JAXB_CONTEXT.createMarshaller();
 
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);

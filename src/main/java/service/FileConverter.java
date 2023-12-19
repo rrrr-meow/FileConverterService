@@ -50,7 +50,7 @@ public class FileConverter {
             log.error("Ошибка при разборе аргументов командной строки: {}", e.getMessage());
         }
     }
-    private static String readFromStdin(String prompt) {
+    private static String readFromStdin(final String prompt) {
         try {
             System.out.print(prompt);
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -61,7 +61,7 @@ public class FileConverter {
         }
     }
 
-    private static void printHelp(Options options) {
+    private static void printHelp(final Options options) {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("utility-name", options);
     }
