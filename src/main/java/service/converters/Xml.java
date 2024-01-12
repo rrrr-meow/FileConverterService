@@ -7,10 +7,9 @@ import service.structure.XML.LibraryXML;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringReader;
-import java.io.StringWriter;
+
 
 public class Xml {
     private static final JAXBContext JAXB_CONTEXT = initJAXBContext();

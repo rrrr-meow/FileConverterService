@@ -7,10 +7,8 @@ import service.structure.XML.BooksXML;
 import service.structure.XML.GenresXML;
 import service.structure.XML.LibraryXML;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
