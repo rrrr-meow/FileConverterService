@@ -8,12 +8,13 @@ import service.structure.XML.GenresXML;
 import service.structure.XML.LibraryXML;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonToXml implements Converter {
     @Override
-    public void convert(final File in, final File out) {
+    public void convert(final StringReader in, final File out) {
         val readJson = new Json();
         val books = readJson.read(in);
         val writeXml = new Xml();

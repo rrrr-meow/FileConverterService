@@ -8,20 +8,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
+import java.io.StringReader;
 
 public class Xml {
     private static final JAXBContext JAXB_CONTEXT = initJAXBContext();
-
-    private static JAXBContext initJAXBContext() {
-        try{
-            return JAXBContext.newInstance(LibraryXML.class);
-        }
-        catch (JAXBException e){
-            throw new RuntimeException("Ошибка при создании JAXBContext");
-        }
+    @SneakyThrows
+    private static JAXBContext initJAXBContext(){
+        return JAXBContext.newInstance(LibraryXML.class);
     }
 
-    public LibraryXML read(final File in) throws JAXBException {
+    public LibraryXML read(final StringReader in) throws JAXBException {
         return (LibraryXML) JAXB_CONTEXT.createUnmarshaller().unmarshal(in);
     }
     @SneakyThrows

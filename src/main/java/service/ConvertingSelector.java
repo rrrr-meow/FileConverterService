@@ -25,7 +25,6 @@ public class ConvertingSelector {
                 throw new ConvertingExeption("MIME-тип исходного или конечного файла не определен");
             }
         } catch (IOException exception) {
-            exception.printStackTrace();
             throw new ConvertingExeption("Ошибка при определении MIME-типов", exception);
         }
     }
@@ -37,6 +36,9 @@ public class ConvertingSelector {
     private static Optional<String> getExpectedMimeType(final String filePath) {
         if (filePath.endsWith(".json")) {
             return Optional.of("application/json");
+        }
+        else if (filePath.endsWith(".xml")) {
+            return Optional.of("application/xml");
         } else {
             return Optional.empty();
         }

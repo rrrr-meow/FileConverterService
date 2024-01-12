@@ -12,13 +12,13 @@ import service.structure.XML.LibraryXML;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 
 public class Json {
     @SneakyThrows
-    public BooksJSON read(final File in){
+    public BooksJSON read(final StringReader in) {
         val jsonMapper = new JsonMapper();
-        return jsonMapper.readValue(in, new TypeReference<>() {
-        });
+        return jsonMapper.readValue(in, new TypeReference<>() {});
     }
     public void write(final LibraryXML library, final File out) throws IOException {
         val books = writeToJson(library);
