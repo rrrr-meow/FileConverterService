@@ -49,14 +49,9 @@ public class FileConverter {
         }
     }
     private static String readFromStdin(final String prompt) {
-        try {
-            log.info(prompt);
-            Scanner scanner = new Scanner(System.in);
-            return scanner.nextLine();
-        } catch (Exception exeption) {
-            log.error("Ошибка при чтении данных из стандартного ввода: {}", exeption.getMessage());
-            return "";
-        }
+        log.info(prompt);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     private static void printHelp(final Options options) {
