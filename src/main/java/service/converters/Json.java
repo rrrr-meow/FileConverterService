@@ -14,11 +14,11 @@ import java.io.*;
 
 public class Json {
     @SneakyThrows
-    public BooksJSON read(final StringReader in) {
+    public BooksJSON read(final InputStream in) {
         val jsonMapper = new JsonMapper();
         return jsonMapper.readValue(in, new TypeReference<>() {});
     }
-    public void write(final LibraryXML library, final FileOutputStream out) throws IOException {
+    public void write(final LibraryXML library, final OutputStream out) throws IOException {
         val books = writeToJson(library);
         val jsonMapper = new JsonMapper();
         jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);

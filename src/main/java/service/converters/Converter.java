@@ -4,5 +4,5 @@ import javax.xml.bind.JAXBException;
 import java.io.*;
 
 public interface Converter {
-    void convert(StringReader in, FileOutputStream out) throws JAXBException, IOException;
+    void convert(InputStream in, OutputStream out) throws JAXBException, IOException;
 }

@@ -7,6 +7,7 @@ import org.apache.commons.cli.*;
 
 import java.io.*;
 import java.util.Optional;
+import java.util.Scanner;
 
 
 @Slf4j
@@ -30,16 +31,16 @@ public class FileConverter {
                 return;
             }
 
-            String sourceFilePath = Optional.ofNullable(cmd.getOptionValue("source"))
+            val sourceFilePath = Optional.ofNullable(cmd.getOptionValue("source"))
                     .orElseGet(() -> readFromStdin("Введите данные для конвертации: "));
 
-            String destinationFilePath = Optional.ofNullable(cmd.getOptionValue("destination"))
+            val destinationFilePath = Optional.ofNullable(cmd.getOptionValue("destination"))
                     .orElseGet(() -> readFromStdin("Введите путь для сохранения результата: "));
 
             log.info("Данные о файлах считаны!");
 
             val converter = ConvertingSelector.choiseConverter(sourceFilePath, destinationFilePath);
-            converter.convert(new StringReader(fileContent(sourceFilePath)), new FileOutputStream(destinationFilePath));
+            converter.convert(new FileInputStream(sourceFilePath), new FileOutputStream(destinationFilePath));
 
             log.info("Конвертация файла " + sourceFilePath + " в файл " + destinationFilePath + " выполнена успешно");
             log.info("Конвертация файла {} в файл {} выполнена успешно", sourceFilePath, destinationFilePath);
@@ -50,9 +51,9 @@ public class FileConverter {
     private static String readFromStdin(final String prompt) {
         try {
             log.info(prompt);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            return reader.readLine();
-        } catch (IOException exeption) {
+            Scanner scanner = new Scanner(System.in);
+            return scanner.nextLine();
+        } catch (Exception exeption) {
             log.error("Ошибка при чтении данных из стандартного ввода: {}", exeption.getMessage());
             return "";
         }
@@ -62,19 +63,4 @@ public class FileConverter {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("utility-name", options);
     }
-
-    private static String fileContent(final String filePath) {
-        StringBuilder text = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                text.append(line).append(System.lineSeparator());
-            }
-            return text.toString();
-        } catch (IOException exeption) {
-            log.error("Ошибка при чтении содержимого файла: {}", exeption.getMessage());
-            return "";
-        }
-    }
-
 }

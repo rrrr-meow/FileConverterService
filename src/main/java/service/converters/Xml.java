@@ -7,8 +7,8 @@ import service.structure.XML.LibraryXML;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.FileOutputStream;
-import java.io.StringReader;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 public class Xml {
@@ -18,11 +18,11 @@ public class Xml {
         return JAXBContext.newInstance(LibraryXML.class);
     }
 
-    public LibraryXML read(final StringReader in) throws JAXBException {
+    public LibraryXML read(final InputStream in) throws JAXBException {
         return (LibraryXML) JAXB_CONTEXT.createUnmarshaller().unmarshal(in);
     }
     @SneakyThrows
-    public void write(final LibraryXML libraryXML, final FileOutputStream out) {
+    public void write(final LibraryXML libraryXML, final OutputStream out) {
         val marshaller = JAXB_CONTEXT.createMarshaller();
 
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);

@@ -7,14 +7,16 @@ import service.structure.XML.BooksXML;
 import service.structure.XML.GenresXML;
 import service.structure.XML.LibraryXML;
 
-import java.io.FileOutputStream;
-import java.io.StringReader;
+import java.io.InputStream;
+
+import java.io.OutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonToXml implements Converter {
     @Override
-    public void convert(final StringReader in, final FileOutputStream out) {
+    public void convert(final InputStream in, final OutputStream out) {
+
         val readJson = new Json();
         val books = readJson.read(in);
         val writeXml = new Xml();
