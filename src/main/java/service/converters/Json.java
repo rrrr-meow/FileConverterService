@@ -10,9 +10,7 @@ import service.structure.JSON.BooksJSON;
 import service.structure.JSON.TitleJSON;
 import service.structure.XML.LibraryXML;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 
 public class Json {
     @SneakyThrows
@@ -20,7 +18,7 @@ public class Json {
         val jsonMapper = new JsonMapper();
         return jsonMapper.readValue(in, new TypeReference<>() {});
     }
-    public void write(final LibraryXML library, final File out) throws IOException {
+    public void write(final LibraryXML library, final FileOutputStream out) throws IOException {
         val books = writeToJson(library);
         val jsonMapper = new JsonMapper();
         jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);

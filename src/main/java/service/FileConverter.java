@@ -39,7 +39,7 @@ public class FileConverter {
             log.info("Данные о файлах считаны!");
 
             val converter = ConvertingSelector.choiseConverter(sourceFilePath, destinationFilePath);
-            converter.convert(new StringReader(fileContent(sourceFilePath)), new File(destinationFilePath));
+            converter.convert(new StringReader(fileContent(sourceFilePath)), new FileOutputStream(destinationFilePath));
 
             log.info("Конвертация файла " + sourceFilePath + " в файл " + destinationFilePath + " выполнена успешно");
             log.info("Конвертация файла {} в файл {} выполнена успешно", sourceFilePath, destinationFilePath);
