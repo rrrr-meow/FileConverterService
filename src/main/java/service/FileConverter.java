@@ -64,7 +64,7 @@ public class FileConverter {
         formatter.printHelp("utility-name", options);
     }
 
-    private static String fileContent(final String filePath){
+    private static String fileContent(final String filePath) {
         StringBuilder text = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
